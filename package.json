@@ -1,0 +1,52 @@
+{
+  "name": "neon-pulse",
+  "version": "1.0.1",
+  "private": true,
+  "description": "A neon arcade survival game for Linux desktops",
+  "main": "main.cjs",
+  "desktopName": "neon-pulse",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --linux AppImage deb"
+  },
+  "devDependencies": {
+    "electron": "^40.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.neonpulse.arcade",
+    "productName": "Neon Pulse",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "game.js",
+      "styles.css",
+      "main.cjs"
+    ],
+    "linux": {
+      "maintainer": "Neon Pulse contributors",
+      "category": "Game;ArcadeGame;",
+      "syncDesktopName": true,
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libuuid1",
+        "libsecret-1-0",
+        "libasound2 | libasound2t64"
+      ]
+    }
+  }
+}

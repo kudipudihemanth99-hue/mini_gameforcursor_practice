@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#070913">
+    <meta name="description" content="A fast neon arcade survival game. Collect energy, dodge hazards, and beat your high score.">
+    <title>Neon Pulse | Arcade Survival</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="game.js" defer></script>
+</head>
+<body>
+    <main class="game-container" aria-label="Neon Pulse arcade game">
+        <canvas id="gameCanvas" aria-label="Game arena"></canvas>
+
+        <section class="hud-layer hidden" id="hud" aria-label="Game status">
+            <div class="hud-top">
+                <div class="stat-box">
+                    <span class="stat-label">SCORE</span>
+                    <span class="stat-value cyan" id="scoreValue">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">STREAK</span>
+                    <span class="stat-value gold" id="multiplierValue">x1</span>
+                </div>
+                <div class="stat-box best-stat">
+                    <span class="stat-label">BEST</span>
+                    <span class="stat-value" id="highScoreValue">0</span>
+                </div>
+            </div>
+
+            <div class="hud-bottom">
+                <div class="energy-bar-container">
+                    <div class="energy-label">SHIP ENERGY</div>
+                    <div class="energy-track" role="meter" aria-label="Ship energy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+                        <div class="energy-fill" id="energyFill"></div>
+                    </div>
+                </div>
+                <div class="powerup-status" id="powerupStatus" aria-label="Active power-ups" aria-live="polite"></div>
+                <div class="game-hint">MOVE TO DODGE <span>·</span> <kbd>P</kbd> PAUSE</div>
+            </div>
+        </section>
+
+        <section class="modal-overlay" id="startScreen" aria-labelledby="gameTitle">
+            <div class="glass-card">
+                <div class="eyebrow"><span class="eyebrow-dot"></span> ARCADE SURVIVAL / 01</div>
+                <h1 class="game-title" id="gameTitle">NEON <span class="highlight">PULSE</span></h1>
+                <p class="subtitle">Stay in motion. Collect energy. Outlast the field.</p>
+
+                <div class="instructions" aria-label="How to play">
+                    <div class="instruction-item"><span class="icon" aria-hidden="true">✦</span><span>Collect the glowing orbs to build your score and streak.</span></div>
+                    <div class="instruction-item"><span class="icon danger-icon" aria-hidden="true">✕</span><span>Keep clear of the red pulse mines. Each hit drains energy.</span></div>
+                    <div class="instruction-item"><span class="icon gold-icon" aria-hidden="true">⬡</span><span>Grab a power-up when the field gets crowded.</span></div>
+                </div>
+
+                <div class="control-selection">
+                    <span class="label">PILOT CONTROL</span>
+                    <div class="toggle-group" role="group" aria-label="Choose movement control">
+                        <button class="toggle-btn active" id="btnControlMouse" type="button" aria-pressed="true">Pointer</button>
+                        <button class="toggle-btn" id="btnControlKey" type="button" aria-pressed="false">Keyboard</button>
+                    </div>
+                </div>
+
+                <button class="sound-btn" id="btnSoundToggle" type="button" aria-label="Toggle sound">Sound: on</button>
+                <div class="button-group">
+                    <button class="btn primary-btn" id="btnStart" type="button">START RUN <span aria-hidden="true">→</span></button>
+                </div>
+                <p class="key-hint">WASD / ARROW KEYS <span>·</span> P OR ESC TO PAUSE</p>
+            </div>
+        </section>
+
+        <section class="modal-overlay hidden" id="pauseScreen" aria-labelledby="pauseTitle">
+            <div class="glass-card compact">
+                <div class="eyebrow"><span class="eyebrow-dot"></span> RUN INTERRUPTED</div>
+                <h2 class="game-title" id="pauseTitle">PAUSED<span class="highlight">.</span></h2>
+                <p class="subtitle">Catch your breath. The field is waiting.</p>
+                <div class="button-group vertical">
+                    <button class="btn primary-btn" id="btnResume" type="button">RESUME RUN <span aria-hidden="true">→</span></button>
+                    <button class="btn secondary-btn" id="btnRestartPause" type="button">RESTART RUN</button>
+                </div>
+                <p class="key-hint">PRESS P OR ESC TO RESUME</p>
+            </div>
+        </section>
+
+        <section class="modal-overlay hidden" id="gameOverScreen" aria-labelledby="gameOverTitle">
+            <div class="glass-card">
+                <div class="eyebrow"><span class="eyebrow-dot danger-dot"></span> SIGNAL LOST</div>
+                <h2 class="danger-title" id="gameOverTitle">RUN ENDED</h2>
+                <p class="subtitle">The pulse fades. Your next run starts now.</p>
+                <div class="results-grid">
+                    <div class="result-box"><span class="result-label">FINAL SCORE</span><span class="result-value cyan" id="finalScore">0</span></div>
+                    <div class="result-box"><span class="result-label">PERSONAL BEST</span><span class="result-value gold" id="bestScore">0</span></div>
+                    <div class="result-box"><span class="result-label">ORBS COLLECTED</span><span class="result-value" id="orbsCollected">0</span></div>
+                    <div class="result-box"><span class="result-label">TOP STREAK</span><span class="result-value" id="maxMultiplier">x1</span></div>
+                </div>
+                <div class="button-group">
+                    <button class="btn primary-btn" id="btnPlayAgain" type="button">PLAY AGAIN <span aria-hidden="true">→</span></button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
